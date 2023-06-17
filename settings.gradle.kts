@@ -1,2 +1,2 @@
-rootProject.name = "ynab_reconcile"
+rootProject.name = "ynab-reconcile"
 

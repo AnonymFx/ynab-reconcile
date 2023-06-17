@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    id("application")
+    id("org.graalvm.buildtools.native") version("0.9.23")
 }
 
 group = "anonym.fx"
@@ -16,4 +18,21 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass.set("anonym.fx.Main")
+}
+
+graalvmNative {
+    binaries {
+        all {
+            resources.autodetect()
+            javaLauncher.set(javaToolchains.launcherFor {
+                languageVersion.set(JavaLanguageVersion.of(17))
+                vendor.set(JvmVendorSpec.matching("GraalVM Community"))
+            })
+        }
+    }
+    toolchainDetection.set(false)
 }
