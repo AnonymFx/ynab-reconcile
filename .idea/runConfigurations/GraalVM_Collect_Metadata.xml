@@ -10,6 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
+          <option value="clean" />
           <option value="run" />
           <option value="--args=&quot;ynab.csv bank.csv&quot;" />
           <option value="metadataCopy" />

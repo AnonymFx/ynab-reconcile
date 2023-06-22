@@ -39,6 +39,6 @@ public class YnabTransaction {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %.2f€", DateUtils.formatDate(date), payee, getAmount());
+        return String.format("%s, %s, %s:%s, %.2f€", DateUtils.formatDate(date), payee, category, memo, getAmount());
     }
 }

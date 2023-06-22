@@ -38,7 +38,7 @@ public class YnabReconcile implements Callable<Integer> {
             ynabTransactions = new CsvToBeanBuilder<YnabTransaction>(fileReader).withType(YnabTransaction.class).build().parse();
         }
         try (FileReader fileReader = new FileReader(dkbCsv)) {
-            bankTransactions = new CsvToBeanBuilder<BankTransaction>(fileReader).withType(BankTransaction.class).withSkipLines(4).withSeparator(';').build().parse();
+            bankTransactions = new CsvToBeanBuilder<BankTransaction>(fileReader).withType(BankTransaction.class).withSeparator(';').build().parse();
         }
 
         ReconciliationResult reconciliationResult = matchTransactions(ynabTransactions, bankTransactions);
