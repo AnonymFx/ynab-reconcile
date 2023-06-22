@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Java" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="anonym.fx.YnabReconcile" />
+    <module name="ynab-reconcile.main" />
+    <option name="PROGRAM_PARAMETERS" value="ynab.csv bank.csv" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="anonym.fx.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

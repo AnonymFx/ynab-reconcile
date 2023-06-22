@@ -9,6 +9,8 @@ build/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/uiDesigner.xml
+.idea/csv-editor.xml
 *.iws
 *.iml
 *.ipr
@@ -43,3 +45,7 @@ bin/
 
 ### GraalVM ###
 graalvm*
+
+### Local Test Data###
+ynab.csv
+bank.csv
