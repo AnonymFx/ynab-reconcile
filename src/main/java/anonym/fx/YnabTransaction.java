@@ -19,10 +19,10 @@ public class YnabTransaction {
     private String category;
     @CsvBindByName(column = "Memo")
     private String memo;
-    @CsvBindByName(column = "Outflow")
-    private String outflow;
-    @CsvBindByName(column = "Inflow")
-    private String inflow;
+    @CsvBindByName(column = "Outflow", capture = "(.*)€")
+    private float outflow;
+    @CsvBindByName(column = "Inflow", capture = "(.*)€")
+    private float inflow;
     @CsvBindByName(column = "Cleared")
     private String cleared;
 

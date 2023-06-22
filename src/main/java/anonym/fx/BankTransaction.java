@@ -2,7 +2,7 @@ package anonym.fx;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class DkbTransaction {
+public class BankTransaction {
     @CsvBindByName(column = "Buchungsdatum")
     private String bookingDate;
     @CsvBindByName(column = "Wertstellung")
@@ -17,8 +17,8 @@ public class DkbTransaction {
     private String note;
     @CsvBindByName(column = "Umsatztyp")
     private String transactionType;
-    @CsvBindByName(column = "Betrag")
-    private String amount;
+    @CsvBindByName(column = "Betrag", capture = "(.*)€", locale = "de-DE")
+    private float amount;
     @CsvBindByName(column = "Gläubiger-ID")
     private String creditorId;
     @CsvBindByName(column = "Mandatsreferenz")
