@@ -1,12 +1,18 @@
 package anonym.fx;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
+
+import java.util.Date;
 
 public class BankTransaction {
+    public static final String DATE_FORMAT = "dd.MM.yy";
     @CsvBindByName(column = "Buchungsdatum")
-    public String bookingDate;
+    @CsvDate(DATE_FORMAT)
+    public Date bookingDate;
     @CsvBindByName(column = "Wertstellung")
-    public String billingDate;
+    @CsvDate(DATE_FORMAT)
+    public Date billingDate;
     @CsvBindByName(column = "Status")
     public String status;
     @CsvBindByName(column = "Zahlungspflichtige*r")
@@ -35,6 +41,6 @@ public class BankTransaction {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %.2f€", bookingDate, getPayee(), amount);
+        return String.format("%s, %s, %.2f€", DateUtils.formatDate(bookingDate), getPayee(), amount);
     }
 }

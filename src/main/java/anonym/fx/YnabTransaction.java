@@ -1,6 +1,9 @@
 package anonym.fx;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
+
+import java.util.Date;
 
 public class YnabTransaction {
     @CsvBindByName(column = "Account")
@@ -8,7 +11,8 @@ public class YnabTransaction {
     @CsvBindByName(column = "Flag")
     public String flag;
     @CsvBindByName(column = "Date")
-    public String date;
+    @CsvDate("dd.MM.yyyy")
+    public Date date;
     @CsvBindByName(column = "Payee")
     public String payee;
     @CsvBindByName(column = "Category Group/Category")
@@ -35,6 +39,6 @@ public class YnabTransaction {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %.2f€", date, payee, getAmount());
+        return String.format("%s, %s, %.2f€", DateUtils.formatDate(date), payee, getAmount());
     }
 }
