@@ -23,9 +23,9 @@ public class YnabTransaction {
     public String category;
     @CsvBindByName(column = "Memo")
     public String memo;
-    @CsvBindByName(column = "Outflow", capture = "(.*)€")
+    @CsvBindByName(column = "Outflow", capture = "(.*)€", locale = "en-US")
     public float outflow;
-    @CsvBindByName(column = "Inflow", capture = "(.*)€")
+    @CsvBindByName(column = "Inflow", capture = "(.*)€", locale = "en-US")
     public float inflow;
     @CsvBindByName(column = "Cleared")
     public String cleared;

@@ -41,6 +41,8 @@ application {
 graalvmNative {
     binaries {
         all {
+            // Include resource bundle for OpenCSV
+            // Include english local for YNAB CSV parsing and german locale for bank CSV parsing
             buildArgs("-H:IncludeResourceBundles=opencsv", "-H:IncludeLocales=en,de")
             resources.autodetect()
         }
