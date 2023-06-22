@@ -7,10 +7,7 @@ import picocli.CommandLine;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(mixinStandardHelpOptions = true)
@@ -44,9 +41,12 @@ public class YnabReconcile implements Callable<Integer> {
     }
 
     static List<BankTransaction> parseBankCsv(File bankCsv) throws IOException {
-        List<BankTransaction> bankTransactions;
+        List<BankTransaction> bankTransactions = Collections.emptyList();
         try (FileReader fileReader = new FileReader(bankCsv)) {
             bankTransactions = new CsvToBeanBuilder<BankTransaction>(fileReader).withType(BankTransaction.class).withSeparator(';').build().parse();
+        } catch (RuntimeException e) {
+            System.err.println();
+            System.err.println("Could not read the Bank CSV file. Did you forget to remove the first couple of lines (\"header\" from DKB CSV export)?");
         }
         return bankTransactions;
     }
