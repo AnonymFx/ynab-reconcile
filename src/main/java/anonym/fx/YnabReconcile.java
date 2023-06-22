@@ -6,6 +6,7 @@ import picocli.CommandLine;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -20,7 +21,7 @@ public class YnabReconcile implements Callable<Integer> {
     private File ynabCsv;
 
     @CommandLine.Parameters(index = "1", description = "The CSV file exported from your bank")
-    private File dkbCsv;
+    private File bankCsv;
 
     @CommandLine.Option(names = {"-d", "--debug"})
     private boolean debug = false;
@@ -32,22 +33,33 @@ public class YnabReconcile implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        List<YnabTransaction> ynabTransactions;
-        List<BankTransaction> bankTransactions;
-        try (FileReader fileReader = new FileReader(ynabCsv)) {
-            ynabTransactions = new CsvToBeanBuilder<YnabTransaction>(fileReader).withType(YnabTransaction.class).build().parse();
-        }
-        try (FileReader fileReader = new FileReader(dkbCsv)) {
-            bankTransactions = new CsvToBeanBuilder<BankTransaction>(fileReader).withType(BankTransaction.class).withSeparator(';').build().parse();
-        }
+        List<YnabTransaction> ynabTransactions = parseYnabCsv(ynabCsv);
+        List<BankTransaction> bankTransactions = parseBankCsv(bankCsv);
 
-        ReconciliationResult reconciliationResult = matchTransactions(ynabTransactions, bankTransactions);
+        ReconciliationResult reconciliationResult = matchTransactions(ynabTransactions, bankTransactions, debug);
+
         printResults(reconciliationResult);
 
         return 0;
     }
 
-    private ReconciliationResult matchTransactions(List<YnabTransaction> ynabTransactions, List<BankTransaction> bankTransactions) {
+    static List<BankTransaction> parseBankCsv(File bankCsv) throws IOException {
+        List<BankTransaction> bankTransactions;
+        try (FileReader fileReader = new FileReader(bankCsv)) {
+            bankTransactions = new CsvToBeanBuilder<BankTransaction>(fileReader).withType(BankTransaction.class).withSeparator(';').build().parse();
+        }
+        return bankTransactions;
+    }
+
+    static List<YnabTransaction> parseYnabCsv(File ynabCsv) throws IOException {
+        List<YnabTransaction> ynabTransactions;
+        try (FileReader fileReader = new FileReader(ynabCsv)) {
+            ynabTransactions = new CsvToBeanBuilder<YnabTransaction>(fileReader).withType(YnabTransaction.class).build().parse();
+        }
+        return ynabTransactions;
+    }
+
+    static ReconciliationResult matchTransactions(List<YnabTransaction> ynabTransactions, List<BankTransaction> bankTransactions, boolean debug) {
         List<Pair<YnabTransaction, BankTransaction>> matchingTransactions = new ArrayList<>();
         ArrayList<YnabTransaction> remainingYnabTransactions = new ArrayList<>(ynabTransactions);
         ArrayList<BankTransaction> remainingBankTransactions = new ArrayList<>(bankTransactions);
@@ -73,7 +85,7 @@ public class YnabReconcile implements Callable<Integer> {
         return new ReconciliationResult(matchingTransactions, remainingYnabTransactions, remainingBankTransactions);
     }
 
-    private void printResults(ReconciliationResult reconciliationResult) {
+    private static void printResults(ReconciliationResult reconciliationResult) {
         System.out.println("Transactions only found in Bank");
         reconciliationResult.unmachedBankTransactions.forEach(System.out::println);
 

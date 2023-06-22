@@ -1,0 +1,3 @@
+"Account","Flag","Date","Payee","Category Group/Category","Category Group","Category","Memo","Outflow","Inflow","Cleared"
+"My Account","","22.06.2023","Some Payee 1","Some Group 1/Some Category 1","Some Group 1","Some Category 1","Some Memo 1",4.20€,0.00€,"Uncleared"
+"My Account","","24.06.2023","Some Payee 2","Some Group 2/Some Category 2","Some Group 2","Some Category 2","Some Memo 2",0.00€,69.00€,"Uncleared"

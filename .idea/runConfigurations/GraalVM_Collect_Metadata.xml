@@ -12,7 +12,7 @@
         <list>
           <option value="clean" />
           <option value="run" />
-          <option value="--args=&quot;ynab.csv bank.csv&quot;" />
+          <option value="--args=&quot;src/test/resources/ynab.csv src/test/resources/bank.csv&quot;" />
           <option value="metadataCopy" />
           <option value="--task" />
           <option value="run" />
