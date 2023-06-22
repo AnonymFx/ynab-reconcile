@@ -40,7 +40,7 @@ application {
 graalvmNative {
     binaries {
         all {
-            buildArgs("-H:IncludeResourceBundles=opencsv")
+            buildArgs("-H:IncludeResourceBundles=opencsv", "-H:IncludeLocales=en,de")
             resources.autodetect()
             javaLauncher.set(javaToolchains.launcherFor {
                 languageVersion.set(JavaLanguageVersion.of(17))
