@@ -4,42 +4,37 @@ import com.opencsv.bean.CsvBindByName;
 
 public class YnabTransaction {
     @CsvBindByName(column = "Account")
-    private String account;
+    public String account;
     @CsvBindByName(column = "Flag")
-    private String flag;
+    public String flag;
     @CsvBindByName(column = "Date")
-    private String date;
+    public String date;
     @CsvBindByName(column = "Payee")
-    private String payee;
+    public String payee;
     @CsvBindByName(column = "Category Group/Category")
-    private String categoryAndGroup;
+    public String categoryAndGroup;
     @CsvBindByName(column = "Category Group")
-    private String categoryGroup;
+    public String categoryGroup;
     @CsvBindByName(column = "Category")
-    private String category;
+    public String category;
     @CsvBindByName(column = "Memo")
-    private String memo;
+    public String memo;
     @CsvBindByName(column = "Outflow", capture = "(.*)€")
-    private float outflow;
+    public float outflow;
     @CsvBindByName(column = "Inflow", capture = "(.*)€")
-    private float inflow;
+    public float inflow;
     @CsvBindByName(column = "Cleared")
-    private String cleared;
+    public String cleared;
+
+    public float getAmount() {
+        if (outflow != 0) {
+            return -outflow;
+        }
+        return inflow;
+    }
 
     @Override
     public String toString() {
-        return "YnabTransaction{" +
-                "account='" + account + '\'' +
-                ", flag='" + flag + '\'' +
-                ", date='" + date + '\'' +
-                ", payee='" + payee + '\'' +
-                ", categoryAndGroup='" + categoryAndGroup + '\'' +
-                ", categoryGroup='" + categoryGroup + '\'' +
-                ", category='" + category + '\'' +
-                ", memo='" + memo + '\'' +
-                ", outflow='" + outflow + '\'' +
-                ", inflow='" + inflow + '\'' +
-                ", cleared='" + cleared + '\'' +
-                '}';
+        return String.format("%s, %s, %.2f€", date, payee, getAmount());
     }
 }

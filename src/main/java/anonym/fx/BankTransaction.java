@@ -4,42 +4,37 @@ import com.opencsv.bean.CsvBindByName;
 
 public class BankTransaction {
     @CsvBindByName(column = "Buchungsdatum")
-    private String bookingDate;
+    public String bookingDate;
     @CsvBindByName(column = "Wertstellung")
-    private String billingDate;
+    public String billingDate;
     @CsvBindByName(column = "Status")
-    private String status;
+    public String status;
     @CsvBindByName(column = "Zahlungspflichtige*r")
-    private String payer;
+    public String payer;
     @CsvBindByName(column = "Zahlungsempfänger*in")
-    private String payee;
+    public String payee;
     @CsvBindByName(column = "Verwendungszweck")
-    private String note;
+    public String note;
     @CsvBindByName(column = "Umsatztyp")
-    private String transactionType;
+    public String transactionType;
     @CsvBindByName(column = "Betrag", capture = "(.*)€", locale = "de-DE")
-    private float amount;
+    public float amount;
     @CsvBindByName(column = "Gläubiger-ID")
-    private String creditorId;
+    public String creditorId;
     @CsvBindByName(column = "Mandatsreferenz")
-    private String mandateReference;
+    public String mandateReference;
     @CsvBindByName(column = "Kundenreferenz")
-    private String customerReference;
+    public String customerReference;
+
+    public String getPayee() {
+        if (payer.equals("ISSUER") || payer.equals("Thomas Pettinger")) {
+            return payee;
+        }
+        return payer;
+    }
 
     @Override
     public String toString() {
-        return "DkbTransaction{" +
-                "bookingDate='" + bookingDate + '\'' +
-                ", billingDate='" + billingDate + '\'' +
-                ", status='" + status + '\'' +
-                ", payer='" + payer + '\'' +
-                ", payee='" + payee + '\'' +
-                ", note='" + note + '\'' +
-                ", transactionType='" + transactionType + '\'' +
-                ", amount='" + amount + '\'' +
-                ", creditorId='" + creditorId + '\'' +
-                ", mandateReference='" + mandateReference + '\'' +
-                ", customerReference='" + customerReference + '\'' +
-                '}';
+        return String.format("%s, %s, %.2f€", bookingDate, getPayee(), amount);
     }
 }
