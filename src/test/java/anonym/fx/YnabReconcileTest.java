@@ -16,7 +16,7 @@ class YnabReconcileTest {
     @Test
     void testYnabCsvParsing() throws IOException {
         List<YnabTransaction> ynabTransactions = YnabReconcile.parseYnabCsv(new File(YNAB_CSV_PATH));
-        assertThat(ynabTransactions).hasSize(2);
+        assertThat(ynabTransactions).hasSize(4);
     }
 
     @Test
@@ -26,12 +26,13 @@ class YnabReconcileTest {
     }
 
     @Test
-    void testMatching() throws IOException {
+    void testMatching() throws Exception {
         List<YnabTransaction> ynabTransactions = YnabReconcile.parseYnabCsv(new File(YNAB_CSV_PATH));
         List<BankTransaction> bankTransactions = YnabReconcile.parseBankCsv(new File(BANK_CSV_PATH));
-        ReconciliationResult reconciliationResult = YnabReconcile.matchTransactions(ynabTransactions, bankTransactions, false);
+        List<YnabTransaction> consolidatedYnabTransactions = YnabReconcile.consolidateYnabSplitTransactions(ynabTransactions);
+        ReconciliationResult reconciliationResult = YnabReconcile.matchTransactions(consolidatedYnabTransactions, bankTransactions, false);
         assertThat(reconciliationResult.matchingTransactions).hasSize(1);
-        assertThat(reconciliationResult.unmatchedYnabTransactions).hasSize(1);
+        assertThat(reconciliationResult.unmatchedYnabTransactions).hasSize(2);
         assertThat(reconciliationResult.unmachedBankTransactions).hasSize(1);
     }
 }

@@ -30,6 +30,23 @@ public class YnabTransaction {
     @CsvBindByName(column = "Cleared")
     public String cleared;
 
+    public YnabTransaction(String account, String flag, Date date, String payee, String categoryAndGroup, String categoryGroup, String category, String memo, float outflow, float inflow, String cleared) {
+        this.account = account;
+        this.flag = flag;
+        this.date = date;
+        this.payee = payee;
+        this.categoryAndGroup = categoryAndGroup;
+        this.categoryGroup = categoryGroup;
+        this.category = category;
+        this.memo = memo;
+        this.outflow = outflow;
+        this.inflow = inflow;
+        this.cleared = cleared;
+    }
+
+    public YnabTransaction() {
+    }
+
     public float getAmount() {
         if (outflow != 0) {
             return -outflow;
