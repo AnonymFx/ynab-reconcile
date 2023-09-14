@@ -39,7 +39,10 @@ public class YnabReconcile implements Callable<Integer> {
     public Integer call() throws Exception {
         List<YnabTransaction> ynabTransactions = parseYnabCsv(ynabCsv);
         List<YnabTransaction> consolidatedYnabTransactions = consolidateYnabSplitTransactions(ynabTransactions);
+        consolidatedYnabTransactions.sort(Comparator.comparing(trans -> trans.date));
+
         List<BankTransaction> bankTransactions = parseBankCsv(bankCsv);
+        bankTransactions.sort(Comparator.comparing(trans -> trans.bookingDate));
 
         ReconciliationResult reconciliationResult = matchTransactions(consolidatedYnabTransactions, bankTransactions, debug);
 
