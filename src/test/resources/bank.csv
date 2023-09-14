@@ -1,3 +1,3 @@
-"Buchungstag";"Wertstellung";"Buchungstext";Auftraggeber / Beg�nstigter;"Verwendungszweck";"Kontonummer";"BLZ";Betrag (EUR);Gl�ubiger-ID;"Mandatsreferenz";"Kundenreferenz";
-"20.06.2023";"20.06.2023";"Kartenzahlung";"Some Payee 1 slightly different";"Some Notes 1";"1234567890";"SOMEBLZ";"-4,20";"";"";"";
-"22.06.2023";"22.06.2023";"Kartenzahlung";"Some Payee 2 slightly different";"Some Notes 2";"1234567890";"SOMEBLZ";"-13,37";"";"";"";
+"Buchungsdatum";"Wertstellung";"Status";"Zahlungspflichtige*r";"Zahlungsempfänger*in";"Verwendungszweck";"Umsatztyp";"Betrag";"Gläubiger-ID";"Mandatsreferenz";"Kundenreferenz"
+"20.06.23";"20.06.23";"Gebucht";"Payer";"Payee";"Some Notes 1";"Ausgang";"-4,20 €";"";"";""
+"22.06.23";"22.06.23";"Gebucht";"Payer";"Payee";"Some Notes 2";"Eingang";"13,37 €";"";"";""

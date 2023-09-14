@@ -1,7 +1,7 @@
 # YNAB Reconcile
 
 Tool to compare [YNAB](https://ynab.com) transactions to transactions from a bank. Transaction lists have to be provided
-via CSV files. Bank CSV format is currently the one exported from the (old) [DKB online banking](https://dkb.de)
+via CSV files. Bank CSV format is currently the one exported from the [DKB online banking](https://dkb.de)
 (**you'll need to remove the first couple of lines first**).
 
 ```
