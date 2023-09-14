@@ -143,17 +143,18 @@ public class YnabReconcile implements Callable<Integer> {
     }
 
     private static void printResults(ReconciliationResult reconciliationResult) {
-        System.out.println("Transactions only found in Bank");
+        System.out.println();
+        System.out.println("*** Transactions only found in Bank ***");
         reconciliationResult.unmachedBankTransactions.forEach(System.out::println);
 
         System.out.println();
 
-        System.out.println("Transactions only found in YNAB");
+        System.out.println("*** Transactions only found in YNAB ***");
         reconciliationResult.unmatchedYnabTransactions.forEach(System.out::println);
 
         System.out.println();
 
-        System.out.println("Matching transactions (YNAB <----> Bank)");
+        System.out.println("*** Matching transactions (YNAB <----> Bank) ***");
         Integer maxStringLength = reconciliationResult.matchingTransactions.stream().map(pair -> pair.getLeft().toString().length()).max(Comparator.naturalOrder()).orElse(0);
         reconciliationResult.matchingTransactions.forEach(pair -> System.out.printf("%" + maxStringLength + "s <----> %s%n", pair.getLeft(), pair.getRight()));
     }

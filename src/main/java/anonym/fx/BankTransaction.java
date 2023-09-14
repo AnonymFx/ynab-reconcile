@@ -26,7 +26,7 @@ public class BankTransaction {
     @Override
     public String toString() {
         return String.format("%s, %s, %s, %.2f€", DateUtils.formatDate(bookingDate),
-                payee.replaceAll("\\s+", " ") + " -> " + payer.replaceAll("\\s+", " "),
+                payee.replaceAll("\\s+", " ") + " - " + payer.replaceAll("\\s+", " "),
                 note.replaceAll("\\s+", " "), amount);
     }
 }
