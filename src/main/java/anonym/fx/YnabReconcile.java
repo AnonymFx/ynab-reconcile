@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import org.graalvm.collections.Pair;
 import picocli.CommandLine;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -54,7 +55,14 @@ public class YnabReconcile implements Callable<Integer> {
     static List<BankTransaction> parseBankCsv(File bankCsv) throws IOException {
         List<BankTransaction> bankTransactions = Collections.emptyList();
         try (FileReader fileReader = new FileReader(bankCsv)) {
-            bankTransactions = new CsvToBeanBuilder<BankTransaction>(fileReader).withType(BankTransaction.class).withSeparator(';').build().parse();
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            System.out.println("!!! Skipping the first 4 lines in the bank CSV to remove headers in the DKB export format !!!");
+            // Skip first 4 (header) lines, see bank.csv
+            bufferedReader.readLine();
+            bufferedReader.readLine();
+            bufferedReader.readLine();
+            bufferedReader.readLine();
+            bankTransactions = new CsvToBeanBuilder<BankTransaction>(bufferedReader).withType(BankTransaction.class).withSeparator(';').build().parse();
         } catch (RuntimeException e) {
             System.err.println();
             System.err.println("Could not read the Bank CSV file. Did you forget to remove the first couple of lines (\"header\" from DKB CSV export)?");

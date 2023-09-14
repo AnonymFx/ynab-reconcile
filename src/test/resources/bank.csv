@@ -1,3 +1,7 @@
+"Konto";"my account - IBAN"
+""
+"Kontostand vom 14.09.2023:";"42€"
+""
 "Buchungsdatum";"Wertstellung";"Status";"Zahlungspflichtige*r";"Zahlungsempfänger*in";"Verwendungszweck";"Umsatztyp";"Betrag";"Gläubiger-ID";"Mandatsreferenz";"Kundenreferenz"
 "20.06.23";"20.06.23";"Gebucht";"Payer";"Payee";"Some Notes 1";"Ausgang";"-4,20 €";"";"";""
 "22.06.23";"22.06.23";"Gebucht";"Payer";"Payee";"Some Notes 2";"Eingang";"13,37 €";"";"";""
