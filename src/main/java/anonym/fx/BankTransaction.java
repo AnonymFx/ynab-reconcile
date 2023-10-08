@@ -8,7 +8,7 @@ import java.util.Date;
 public class BankTransaction {
     private static final String DATE_FORMAT = "dd.MM.yy";
 
-    @CsvBindByName(column = "Wertstellung")
+    @CsvBindByName(column = "Buchungsdatum")
     @CsvDate(DATE_FORMAT)
     public Date bookingDate;
     @CsvBindByName(column = "Zahlungsempfänger*in")
