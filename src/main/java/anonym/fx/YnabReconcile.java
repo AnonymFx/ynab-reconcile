@@ -122,7 +122,10 @@ public class YnabReconcile implements Callable<Integer> {
         ArrayList<BankTransaction> remainingBankTransactions = new ArrayList<>(bankTransactions);
 
         bankTransactions.forEach(bankTransaction -> {
-            List<YnabTransaction> matching = remainingYnabTransactions.stream().filter(ynabTransaction -> ynabTransaction.getAmount() == bankTransaction.amount).toList();
+            List<YnabTransaction> matching = remainingYnabTransactions.stream().filter(ynabTransaction ->
+                    // TODO Using BigDecimal would be better
+                    String.format("%.2f", ynabTransaction.getAmount()).equals(String.format("%.2f", bankTransaction.amount))
+            ).toList();
 
             Optional<YnabTransaction> firstMatch = matching.stream().findFirst();
             if (firstMatch.isEmpty()) {
