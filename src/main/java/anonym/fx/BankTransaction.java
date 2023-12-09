@@ -20,7 +20,7 @@ public class BankTransaction {
     @CsvBindByName(column = "Verwendungszweck")
     public String note;
 
-    @CsvBindByName(column = "Betrag", capture = "(.*) €", locale = "de-DE")
+    @CsvBindByName(column = "Betrag (€)", locale = "de-DE")
     public float amount;
 
     @Override
