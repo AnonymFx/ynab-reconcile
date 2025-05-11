@@ -62,7 +62,7 @@ public class YnabReconcile implements Callable<Integer> {
             bufferedReader.readLine();
             bufferedReader.readLine();
             bufferedReader.readLine();
-            bankTransactions = new CsvToBeanBuilder<BankTransaction>(bufferedReader).withType(BankTransaction.class).withSeparator(',').build().parse();
+            bankTransactions = new CsvToBeanBuilder<BankTransaction>(bufferedReader).withType(BankTransaction.class).withSeparator(';').build().parse();
         } catch (RuntimeException e) {
             System.err.println();
             System.err.println("Could not read the Bank CSV file. Did you forget to remove the first couple of lines (\"header\" from DKB CSV export)?");
